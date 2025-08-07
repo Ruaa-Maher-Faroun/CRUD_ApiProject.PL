@@ -1,4 +1,10 @@
 
+using CRUD_ApiProject.BLL.Services;
+using CRUD_ApiProject.DAL.Data;
+using CRUD_ApiProject.DAL.Repository;
+using Microsoft.EntityFrameworkCore;
+using Scalar;
+using Scalar.AspNetCore;
 namespace CRUD_ApiProject.PL
 {
     public class Program
@@ -10,6 +16,11 @@ namespace CRUD_ApiProject.PL
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<ICategoryRepoistory, CategoryRepoistory>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
@@ -19,6 +30,7 @@ namespace CRUD_ApiProject.PL
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.MapScalarApiReference();
             }
 
             app.UseHttpsRedirection();
