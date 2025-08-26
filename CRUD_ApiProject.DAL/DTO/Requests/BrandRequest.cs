@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CRUD_ApiProject.DAL.DTO.Responses
+namespace CRUD_ApiProject.DAL.DTO.Requests
 {
-    public class BrandResponse
+    public class BrandRequest
     {
-        public int Id {  get; set; }
         public string Name { get; set; }
-
     }
+
 }

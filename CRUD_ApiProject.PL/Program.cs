@@ -1,7 +1,8 @@
-
-using CRUD_ApiProject.BLL.Services;
+using CRUD_ApiProject.BLL.Services.Classes;
+using CRUD_ApiProject.BLL.Services.Interfaces;
 using CRUD_ApiProject.DAL.Data;
-using CRUD_ApiProject.DAL.Repository;
+using CRUD_ApiProject.DAL.Repositories.Classes;
+using CRUD_ApiProject.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Scalar;
 using Scalar.AspNetCore;
@@ -19,6 +20,8 @@ namespace CRUD_ApiProject.PL
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddScoped<ICategoryRepoistory, CategoryRepoistory>();
+            builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+            builder.Services.AddScoped<IBrandService, BrandService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
