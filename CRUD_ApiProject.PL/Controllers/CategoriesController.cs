@@ -1,6 +1,7 @@
 ﻿using CRUD_ApiProject.BLL.Services.Interfaces;
 using CRUD_ApiProject.DAL.DTO.Requests;
 using CRUD_ApiProject.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace CRUD_ApiProject.PL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService categoryService;

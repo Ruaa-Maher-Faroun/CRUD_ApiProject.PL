@@ -13,7 +13,7 @@ namespace CRUD_ApiProject.BLL.Services.Interfaces
         int Create(TRequest request);
         int Update(int id, TRequest request);
         int Delete(int id);
-        IEnumerable<TResponse>? GetAll();
+        IEnumerable<TResponse>? GetAll(bool onlyActive=false);
         TResponse? GetById(int id);
         bool ToggleStatus(int id);
     }

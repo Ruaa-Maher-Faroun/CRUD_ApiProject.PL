@@ -1,14 +1,18 @@
 ﻿using CRUD_ApiProject.BLL.Services.Interfaces;
 using CRUD_ApiProject.DAL.DTO.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CRUD_ApiProject.PL.Controllers
+namespace CRUD_ApiProject.PL.Areas.Admin.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[area]/[controller]")]
     [ApiController]
+    [Area("Admin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class BrandsController : ControllerBase
     {
+  
         private readonly IBrandService brandService;
 
         public BrandsController(IBrandService brandService)

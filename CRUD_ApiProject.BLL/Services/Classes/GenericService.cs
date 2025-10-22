@@ -35,10 +35,14 @@ namespace CRUD_ApiProject.BLL.Services.Classes
             return _repository.Remove(entity);
         }
 
-        public IEnumerable<TResponse>? GetAll()
+        public IEnumerable<TResponse> GetAll(bool onlyActive=false)
         {
-            var entities = _repository.GetAll().Adapt<IEnumerable<TResponse>>();
-            return entities;
+            var entities = _repository.GetAll();
+            if (onlyActive)
+            {
+                entities = entities.Where(e => e.Status == Status.Active);
+            }
+            return entities.Adapt<IEnumerable<TResponse>>();
         }
 
         public TResponse? GetById(int id)
