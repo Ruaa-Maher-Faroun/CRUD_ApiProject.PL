@@ -14,7 +14,8 @@ namespace CRUD_ApiProject.BLL.Services.Classes
         {
             if (file != null && file.Length > 0) 
             { 
-                var fileName= Guid.NewGuid().ToString();    
+                var fileName= Guid.NewGuid().ToString()+ Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(),"images", fileName);
                 return fileName;
             }
             throw new Exception("ERROR");

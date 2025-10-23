@@ -3,15 +3,16 @@ using CRUD_ApiProject.BLL.Services.Interfaces;
 using CRUD_ApiProject.DAL.DTO.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace CRUD_ApiProject.PL.Areas.Admin.Controllers
 {
-    [Route("api/[area]/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    [Area("Admin")]
-    [Authorize(Roles = "Admin,SuperAdmin")]
+    //[Area("Admin")]
+    //[Authorize(Roles = "Admin,SuperAdmin")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -36,10 +37,10 @@ namespace CRUD_ApiProject.PL.Areas.Admin.Controllers
         //}
 
         [HttpPost("")]
-        public IActionResult Create([FromForm] ProductRequest request)
+        public async Task<IActionResult> Create([FromForm] ProductRequest request)
         {
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var result = _productService.CreateFile(request);
+            
+            var result = await _productService.CreateFile(request);
             return Ok(result);
         }
 
