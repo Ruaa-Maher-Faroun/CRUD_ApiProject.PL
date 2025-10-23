@@ -31,11 +31,16 @@ namespace CRUD_ApiProject.PL
             builder.Services.AddScoped<ICategoryRepoistory, CategoryRepoistory>();
             builder.Services.AddScoped<IBrandRepository, BrandRepository>();
             builder.Services.AddScoped<IBrandService, BrandService>();
+           
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ISeedData, SeedData>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IEmailSender, EmailSetting>();
 
+            builder.Services.AddScoped<IFileService , FileService>();
 
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -58,7 +63,7 @@ namespace CRUD_ApiProject.PL
             };
         });
             var app = builder.Build();
-
+          
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

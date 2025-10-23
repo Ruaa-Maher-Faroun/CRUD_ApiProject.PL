@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CRUD_ApiProject.DAL.DTO.Responses
 {
-    public class BrandResponse
+    public  class ProductResponse
     {
-        public int Id {  get; set; }
-        public string Name { get; set; }
-
+        public string Name {  get; set; }
+        public string Description { get; set; }
     }
 }

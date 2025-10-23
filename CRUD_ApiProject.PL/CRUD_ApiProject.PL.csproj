@@ -20,4 +20,8 @@
     <ProjectReference Include="..\CRUD_ApiProject.BLL\CRUD_ApiProject.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>

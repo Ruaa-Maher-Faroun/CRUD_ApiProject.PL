@@ -68,14 +68,7 @@ namespace CRUD_ApiProject.DAL.Utils
             }
             if (!await _userManager.Users.AnyAsync())
             {
-                var user1 = new ApplicationUser()
-                {
-                    Email = "Ruaafaroun@gmail.com",
-                    FullName = "Ruaa Faroun1",
-                    PhoneNumber = "0594264855",
-                    UserName = "RoRo1",
-                    EmailConfirmed = true
-                };
+              
                 var user2 = new ApplicationUser()
                 {
                     Email = "Ruaafaroun2@gmail.com",
@@ -93,10 +86,19 @@ namespace CRUD_ApiProject.DAL.Utils
                     EmailConfirmed = true
                 };
 
-                await _userManager.CreateAsync(user1,"Pass@121212");
+                var user4 = new ApplicationUser()
+                {
+                    Email = "Ruaafaroun@gmail.com",
+                    FullName = "Ruaa Faroun3",
+                    PhoneNumber = "0594264877",
+                    UserName = "RoRo3",
+                    EmailConfirmed = true
+                };
+
+                await _userManager.CreateAsync(user4,"Pass@121212");
                 await _userManager.CreateAsync(user2, "Pass@121212");
                 await _userManager.CreateAsync(user3, "Pass@121212");
-                await _userManager.AddToRoleAsync(user1, "Admin");
+                await _userManager.AddToRoleAsync(user4, "Admin");
                 await _userManager.AddToRoleAsync(user2, "Customer");
                 await _userManager.AddToRoleAsync(user3, "SuperAdmin");
                 await _context.SaveChangesAsync();
