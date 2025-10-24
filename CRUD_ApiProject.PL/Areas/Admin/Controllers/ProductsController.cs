@@ -9,10 +9,10 @@ using System.Security.Claims;
 
 namespace CRUD_ApiProject.PL.Areas.Admin.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[area]/[controller]")]
     [ApiController]
-    //[Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;

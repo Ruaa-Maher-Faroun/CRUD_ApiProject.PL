@@ -13,12 +13,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar;
 using Scalar.AspNetCore;
+using System.Security.Claims;
 using System.Text;
 namespace CRUD_ApiProject.PL
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public  static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -59,11 +60,22 @@ namespace CRUD_ApiProject.PL
                 ValidateAudience = false,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("jwtOptions")["SecretKey"]))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("jwtOptions")["SecretKey"])),
+                RoleClaimType = "Role",            
+                NameClaimType = ClaimTypes.Name
             };
         });
             var app = builder.Build();
-          
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var seedData = services.GetRequiredService<ISeedData>();
+                seedData.SeedAsync().GetAwaiter().GetResult();
+              
+            }
+
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

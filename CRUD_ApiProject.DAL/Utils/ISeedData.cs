@@ -14,5 +14,7 @@ namespace CRUD_ApiProject.DAL.Utils
         Task DataSeedingAsync();
 
         Task IdentityDataSeedingAsync();
+        Task SeedAsync();
+
     }
 }

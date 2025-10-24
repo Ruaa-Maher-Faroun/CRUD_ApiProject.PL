@@ -68,48 +68,54 @@ namespace CRUD_ApiProject.DAL.Utils
             }
             if (!await _userManager.Users.AnyAsync())
             {
-              
-                var user2 = new ApplicationUser()
+
+                var user1 = new ApplicationUser()
                 {
-                    Email = "Ruaafaroun2@gmail.com",
+                    Email = "Ruaafaroun@gmail.com",
                     FullName = "Ruaa Faroun2",
                     PhoneNumber = "0594264866",
                     UserName = "RoRo2",
                     EmailConfirmed = true
                 };
+                var user2 = new ApplicationUser()
+                {
+                    Email = "Ruaa.m.faroun@gmail.com",
+                    FullName = "Ruaa Faroun3",
+                    PhoneNumber = "0594264877",
+                    UserName = "RoRo3",
+                    EmailConfirmed = true
+                };
+
                 var user3 = new ApplicationUser()
                 {
-                    Email = "Ruaafaroun3@gmail.com",
+                    Email = "Roaa.maher.faroun@gmail.com",
                     FullName = "Ruaa Faroun3",
                     PhoneNumber = "0594264877",
                     UserName = "RoRo3",
                     EmailConfirmed = true
                 };
 
-                var user4 = new ApplicationUser()
-                {
-                    Email = "Ruaafaroun@gmail.com",
-                    FullName = "Ruaa Faroun3",
-                    PhoneNumber = "0594264877",
-                    UserName = "RoRo3",
-                    EmailConfirmed = true
-                };
-
-                await _userManager.CreateAsync(user4,"Pass@121212");
+                await _userManager.CreateAsync(user1, "Pass@121212");
                 await _userManager.CreateAsync(user2, "Pass@121212");
                 await _userManager.CreateAsync(user3, "Pass@121212");
-                await _userManager.AddToRoleAsync(user4, "Admin");
+                await _userManager.AddToRoleAsync(user1, "Admin");
                 await _userManager.AddToRoleAsync(user2, "Customer");
                 await _userManager.AddToRoleAsync(user3, "SuperAdmin");
                 await _context.SaveChangesAsync();
 
 
-                //    await _roleManager.CreateAsync(new IdentityRole("Admin"));
-                //    await _roleManager.CreateAsync(new IdentityRole("Customer"));
-                //    await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                await _roleManager.CreateAsync(new IdentityRole("Customer"));
+                await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
             }
-
+        }
+            public async Task SeedAsync()
+        {
+                await DataSeedingAsync();
+                await IdentityDataSeedingAsync();
         }
 
     }
+
+    
 }

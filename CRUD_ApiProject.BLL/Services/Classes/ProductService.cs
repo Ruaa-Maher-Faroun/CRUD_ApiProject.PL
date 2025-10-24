@@ -25,17 +25,20 @@ namespace CRUD_ApiProject.BLL.Services.Classes
                 _fileService = fileService;
                 _repository = repository;
             }
+
+
+
             public async Task<int> CreateFile(ProductRequest request)
             {
-            var entity = request.Adapt<Product>();
-            entity.CreatedAt = DateTime.UtcNow;
-            if(request.MainImage != null)
-            {
-                var imagePath = await _fileService.UploadAsync(request.MainImage);
-                entity.MainImage = imagePath;
-            }
+                var entity = request.Adapt<Product>();
+                entity.CreatedAt = DateTime.UtcNow;
+                if(request.MainImage != null)
+                {
+                    var imagePath = await _fileService.UploadAsync(request.MainImage);
+                    entity.MainImage = imagePath;
+                }
 
-            return _repository.Add(entity);
+                return _repository.Add(entity);
         }
 
     }
