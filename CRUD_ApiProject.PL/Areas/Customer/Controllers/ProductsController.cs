@@ -9,25 +9,25 @@ namespace CRUD_ApiProject.PL.Areas.Customer.Controllers
     [ApiController]
     [Area("Customer")]
     [Authorize(Roles = "Customer")]
-    public class BrandsController : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        private readonly IBrandService brandService;
+        private readonly IProductService _productService;
 
-        public BrandsController(IBrandService brandService)
+        public ProductsController(IProductService productService)
         {
-            this.brandService = brandService;
+            _productService = productService;
         }
         [HttpGet("")]
         public IActionResult GetAll()
         {
-            return Ok(brandService.GetAll(true));
+            return Ok(_productService.GetAll(true));
         }
         [HttpGet("{id}")]
         public IActionResult Get([FromRoute] int id)
         {
-            var brand = brandService.GetById(id);
-            if (brand is null) return NotFound();
-            return Ok(brand);
+            var product = _productService.GetById(id);
+            if (product is null) return NotFound();
+            return Ok(product);
         }
 
     }
