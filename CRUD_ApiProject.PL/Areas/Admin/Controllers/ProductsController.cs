@@ -23,11 +23,11 @@ namespace CRUD_ApiProject.PL.Areas.Admin.Controllers
         }
 
 
-        //[HttpGet("")]
-        //public IActionResult GetAll()
-        //{
-        //    return Ok(_productService.GetAll());
-        //}
+        [HttpGet("")]
+        public IActionResult GetAll()
+        {
+            return Ok(_productService.GetAll());
+        }
         //[HttpGet("{id}")]
         //public IActionResult Get([FromRoute] int id)
         //{

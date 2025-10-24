@@ -21,7 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\d4df90bf-ff1d-440f-97e8-9f287c6c1ac2.png" />
   </ItemGroup>
 
 </Project>

@@ -87,7 +87,7 @@ namespace CRUD_ApiProject.PL
 
             app.UseAuthorization();
 
-
+            app.UseStaticFiles();
             app.MapControllers();
 
             app.Run();
