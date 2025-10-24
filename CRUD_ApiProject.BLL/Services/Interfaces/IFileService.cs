@@ -9,6 +9,10 @@ namespace CRUD_ApiProject.BLL.Services.Interfaces
 {
     public interface IFileService
     {
-        Task<string> UploadAsync(IFormFile file);
+        Task<string> UploadAsync(IFormFile file,string folder);
+        Task<bool> DeleteAsync(string fileName, string folder);
+
+        Task<bool> UpdateAsync(IFormFile file, string fileName, string folder);
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CRUD_ApiProject.DAL.DTO.Requests;
 using CRUD_ApiProject.DAL.DTO.Responses;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace CRUD_ApiProject.BLL.Services.Interfaces
         IEnumerable<TResponse>? GetAll(bool onlyActive=false);
         TResponse? GetById(int id);
         bool ToggleStatus(int id);
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using CRUD_ApiProject.BLL.Services.Interfaces;
+﻿using CRUD_ApiProject.BLL.Services.Classes;
+using CRUD_ApiProject.BLL.Services.Interfaces;
 using CRUD_ApiProject.DAL.DTO.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +10,7 @@ namespace CRUD_ApiProject.PL.Areas.Admin.Controllers
     [Route("api/[area]/[controller]")]
     [ApiController]
     [Area("Admin")]
-    [Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin")]
     public class BrandsController : ControllerBase
     {
   
@@ -33,17 +34,18 @@ namespace CRUD_ApiProject.PL.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] BrandRequest request)
+        public async Task<IActionResult> Create([FromForm] BrandRequest request)
         {
-            var id = brandService.Create(request);
+            var id = await brandService.CreateFile(request);
             return CreatedAtAction(nameof(Get), new { id }, new { message = "ok" });//201 تم انشاء بنجاح with link to the new brand
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Update([FromRoute] int id,
-            [FromBody] BrandRequest request)
+        public async Task<IActionResult> Update([FromRoute] int id,
+            [FromForm] BrandRequest request)
         {
-            var updated = brandService.Update(id, request);
+            var updated = await brandService.UpdateFile(request, id);
+
             return updated > 0 ? Ok() : NotFound();
         }
 
@@ -55,9 +57,11 @@ namespace CRUD_ApiProject.PL.Areas.Admin.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var deleted = brandService.Delete(id);
+            var deleted = await brandService.DeleteFile(id);
+
+
             return deleted > 0 ? Ok() : NotFound();
         }
 

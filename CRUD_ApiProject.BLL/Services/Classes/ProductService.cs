@@ -34,11 +34,34 @@ namespace CRUD_ApiProject.BLL.Services.Classes
                 entity.CreatedAt = DateTime.UtcNow;
                 if(request.MainImage != null)
                 {
-                    var imagePath = await _fileService.UploadAsync(request.MainImage);
+                    var imagePath = await _fileService.UploadAsync(request.MainImage,"productsImgs");
                     entity.MainImage = imagePath;
                 }
 
                 return _repository.Add(entity);
+        }
+
+        public async Task<int> UpdateFile(ProductRequest request,int id)
+        {
+            var entity = _repository.GetById(id);
+            var fileName = entity.MainImage;
+            if (entity is null) return 0;
+            if (request.MainImage != null && entity.MainImage != null)
+            {
+                await _fileService.UpdateAsync(request.MainImage, fileName,"productsImgs");
+                
+            }
+            var updatedEntity = request.Adapt(entity);
+            entity.MainImage = fileName;
+            return _repository.Update(updatedEntity);
+        }
+
+        public async Task<int> DeleteFile(int id)
+        {
+            var entity = _repository.GetById(id);
+            if (entity is null) return 0;
+            await _fileService.DeleteAsync(entity.MainImage, "productsImgs");
+            return _repository.Remove(entity);
         }
 
     }

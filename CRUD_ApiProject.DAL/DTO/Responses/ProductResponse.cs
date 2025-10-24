@@ -13,6 +13,6 @@ namespace CRUD_ApiProject.DAL.DTO.Responses
         public string Description { get; set; }
         [JsonIgnore]
         public string MainImage { get; set; }
-        public string MainImageUrl => $"https://localhost:7051/images/{MainImage}";
+        public string MainImageUrl => $"https://localhost:7051/images/productsImgs/{MainImage}";
     }
 }

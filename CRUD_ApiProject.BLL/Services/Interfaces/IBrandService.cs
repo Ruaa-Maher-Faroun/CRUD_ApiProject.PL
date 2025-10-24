@@ -11,5 +11,10 @@ namespace CRUD_ApiProject.BLL.Services.Interfaces
 {
     public interface IBrandService : IGenericService<BrandRequest, BrandResponse, Brand>
     {
+        Task<int> CreateFile(BrandRequest request);
+        Task<int> UpdateFile(BrandRequest request, int id);
+        Task<int> DeleteFile(int id);
+
+
     }
 }
