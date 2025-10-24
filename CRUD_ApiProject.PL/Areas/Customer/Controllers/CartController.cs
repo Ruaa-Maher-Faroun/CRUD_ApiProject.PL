@@ -27,5 +27,15 @@ namespace CRUD_ApiProject.PL.Areas.Customer.Controllers
             return result ? Ok() : BadRequest();
 
         }
+
+        [HttpGet("")]
+        public IActionResult GetUserCart()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _cartService.CartSummaryResponse(userId);
+            return Ok(result);
+        }
+
+
     }
 }

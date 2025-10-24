@@ -1,5 +1,6 @@
 ﻿using CRUD_ApiProject.BLL.Services.Interfaces;
 using CRUD_ApiProject.DAL.DTO.Requests;
+using CRUD_ApiProject.DAL.DTO.Responses;
 using CRUD_ApiProject.DAL.Models;
 using CRUD_ApiProject.DAL.Repositories.Interfaces;
 using System;
@@ -28,6 +29,25 @@ namespace CRUD_ApiProject.BLL.Services.Classes
 
             return _cartRepo.Add(newItem) > 0;
         }
+
+
+        public CartSummaryResponse CartSummaryResponse(string UserId)
+        {
+            var cartItems = _cartRepo.GetUserCart(UserId);
+
+            var response = new CartSummaryResponse
+            {
+                Items =  cartItems.Select(ci => new CartResponse
+                {
+                    ProductId = ci.ProductId,
+                    ProductName = ci.Product.Name,
+                    Count = ci.Count,
+                    Price = ci.Product.Price
+                }).ToList()
+            };
+            return response;
+        }
+
 
     }
 }
