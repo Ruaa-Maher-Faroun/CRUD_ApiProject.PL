@@ -16,6 +16,10 @@ namespace CRUD_ApiProject.BLL.Services.Classes
             { 
                 var fileName= Guid.NewGuid().ToString()+ Path.GetExtension(file.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(),"images", fileName);
+                using (var stream = File.Create(filePath))
+                {
+                    await file.CopyToAsync(stream);
+                }
                 return fileName;
             }
             throw new Exception("ERROR");
